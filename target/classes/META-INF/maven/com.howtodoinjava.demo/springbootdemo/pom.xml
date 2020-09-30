@@ -10,7 +10,7 @@
 	<packaging>jar</packaging>
 
 	<name>SpringBootDemo</name>
-	<description>Spring Boot2 REST API Demo for http://howtodoinjava.com</description>
+	<description>Spring Boot2 REST API Demo</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
