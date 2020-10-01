@@ -3,6 +3,15 @@ package com.howtodoinjava.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -68,7 +77,52 @@ public class SpringBootDemoApplicationTests
         }
     }
     
-   /* @Test
+    @Test
+    public void printMultiArr() {
+    	String str = "IN ORDER TO UNDERSTAND RECURSION ONE MUST FIRST UNDERSTAND RECURSION";
+    	String encryptedStr = processStr(str, true);
+    	String decryptedStr = processStr(encryptedStr, false);
+    	
+    	Assert.assertEquals("IONOTDEN*DN*EC*U**FRUONROISRRDENRTSDECESAIERU*TNORSRM*DN*TSUU*TAISNR", 
+    			encryptedStr.replace("?", ""));
+    	Assert.assertEquals(str, decryptedStr.replace("?", ""));
+    	System.out.println("ENCRYPTED=" +encryptedStr.replace("?", ""));
+    	System.out.println("DECRYPTED=" +decryptedStr.replace("?", ""));
+    }
+    
+    public String processStr(String str, boolean doEncrypt) { 
+    	final int x = 10; //constant
+    	if(str.length() <= x) {
+    		return str;
+    	}
+    	final String string = doEncrypt ? str.replace(" ", "*") : str.replace("*", " ");
+    	final int y = (str.length() + x - 1) / x;	
+    	int col = doEncrypt ? y: x; // 
+    	int row = doEncrypt ? x: y;
+    	
+    	String currStr = "";
+    	List<String> arr = IntStream.range(0, col)
+    			.mapToObj(i -> string.substring(i * row, Math.min((i+1) * row, string.length())))
+                .collect(Collectors.toList());
+    	//System.out.println(doEncrypt? "Encrypting..." : "Decrypting...");
+    	for(String s : arr) {
+    		System.out.println(s);
+    	}
+    	for(int i = 0; i < row; i++) {
+    		for(int j = 0; j < col; j++) {
+    			if(arr.get(j).toCharArray().length > i) {
+    				currStr += arr.get(j).toCharArray()[i];
+    			} else {
+    				currStr += "?";
+    			}
+    		}
+    	}
+    	return currStr;
+	}
+    
+ 
+   /*
+    @Test
     public void testAddEmployeeSuccess() throws URISyntaxException 
     {
         RestTemplate restTemplate = new RestTemplate();
