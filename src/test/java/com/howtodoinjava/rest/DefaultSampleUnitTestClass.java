@@ -14,8 +14,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -31,11 +35,19 @@ import com.howtodoinjava.rest.model.Employee;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
-public class SpringBootDemoApplicationTests 
+public class DefaultSampleUnitTestClass 
 {   
     @LocalServerPort
     int randomServerPort;
     
+	private static final Logger logger = LoggerFactory.getLogger(DefaultSampleUnitTestClass.class);
+    
+	@BeforeClass
+    public static void init() {
+		logger.info("------ RUNNING DEFAULT UNIT TEST CLASS ------");
+    }
+
+	
     //@Test
     public void testGetEmployeeListSuccess() throws URISyntaxException 
     {
